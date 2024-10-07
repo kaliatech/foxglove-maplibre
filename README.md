@@ -5,6 +5,7 @@
 ## Development
 
 ### Prerequisites
+
 Recent versions of Node and NPM are required to get started. A node environment manager,
 like [nvm](https://github.com/nvm-sh/nvm), [fnm](https://github.com/Schniz/fnm),
 or [asdf](https://asdf-vm.com/), is recommended.
@@ -36,6 +37,7 @@ npm install
 ```
 
 ### Building
+
 ```shell
 # Lint (expect zero warnings or errors)
 npm run lint
@@ -48,6 +50,7 @@ npm run build
 ```
 
 ### Deployment
+
 ```shell
 # Deploy to local Foxglove installation
 npm run local-install
@@ -60,7 +63,6 @@ npm run local-install
 After local-install, restart the Foxglove desktop or `ctrl-r` to refresh if it is already open.
 
 Debug inside Foxglove using `ctrl-i` to open dev console.
-
 
 ## Distribution
 
