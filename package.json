@@ -5,7 +5,7 @@
   "publisher": "unknown",
   "homepage": "",
   "version": "0.0.0",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "./dist/extension.js",
   "keywords": [],
   "scripts": {

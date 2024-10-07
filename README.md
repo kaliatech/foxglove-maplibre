@@ -1,6 +1,6 @@
 # Foxglove MapLibre Extension
 
-Adds a panel for displaying positional data using MapLibre.
+[Foxglove](https://foxglove.dev) allows developers to create [extensions](https://docs.foxglove.dev/docs/visualization/extensions/introduction). This repo contains source for an extension that provides a panel for displaying positional data using MapLibre.
 
 ## Development
 
@@ -50,12 +50,17 @@ npm run build
 ### Deployment
 ```shell
 # Deploy to local Foxglove installation
+npm run local-install
 
 # Rebuild and redeploy on any change
-# (restart of Foxglove still required. TODO: Anyway around this?)
-
+# TODO: add script using something like nodemon
 
 ```
+
+After local-install, restart the Foxglove desktop or `ctrl-r` to refresh if it is already open.
+
+Debug inside Foxglove using `ctrl-i` to open dev console.
+
 
 ## Distribution
 
