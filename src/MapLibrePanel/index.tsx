@@ -1,14 +1,17 @@
 import { Immutable, MessageEvent, PanelExtensionContext } from "@foxglove/extension";
 import { useEffect, useLayoutEffect, useState, JSX } from "react";
+import { MapLibreMap } from "./MapLibreMap";
 
 export const MapLibrePanel = ({ context }: { context: PanelExtensionContext }): JSX.Element => {
   //  const [topics, setTopics] = useState<undefined | Immutable<Topic[]>>();
-  const [messages, setMessages] = useState<undefined | Immutable<MessageEvent[]>>();
+  const [_currFrameMsgs, setCurrFrameMsgs] = useState<undefined | Immutable<MessageEvent[]>>();
+
+  const [_allFrameMsgs, setAllFrameMsgs] = useState<undefined | Immutable<MessageEvent[]>>();
 
   const [renderDone, setRenderDone] = useState<(() => void) | undefined>();
 
   useLayoutEffect(() => {
-    console.log("useLayoutEffect");
+    //console.debug("useLayoutEffect");
 
     context.onRender = (renderState, done) => {
       // Set the done callback into a state variable to trigger a re-render.
@@ -19,9 +22,15 @@ export const MapLibrePanel = ({ context }: { context: PanelExtensionContext }): 
       //   setTopics(renderState.topics);
 
       // currentFrame has messages on subscribed topics since the last render call
-      setMessages(renderState.currentFrame);
+      if (renderState.currentFrame) {
+        setCurrFrameMsgs(renderState.currentFrame);
+      }
 
-      console.log("renderState", renderState);
+      if (renderState.allFrames) {
+        setAllFrameMsgs(renderState.allFrames);
+      }
+
+      //console.log("renderState", renderState);
     };
 
     // After adding a render handler, you must indicate which fields from RenderState will trigger updates.
@@ -34,6 +43,9 @@ export const MapLibrePanel = ({ context }: { context: PanelExtensionContext }): 
     // This corresponds to the _currentFrame_ field of render state.
     context.watch("currentFrame");
 
+    // all frames to display gps history on map
+    context.watch("allFrames");
+
     // subscribe to some topics, you could do this within other effects, based on input fields, etc
     // Once you subscribe to topics, currentFrame will contain message events from those topics (assuming there are messages).
     context.subscribe([{ topic: "/gps", preload: true }]);
@@ -43,12 +55,13 @@ export const MapLibrePanel = ({ context }: { context: PanelExtensionContext }): 
   useEffect(() => {
     renderDone?.();
   }, [renderDone]);
-
-  console.log("messages", messages);
+  //
+  // console.log("allFrameMsgs", allFrameMsgs);
+  // console.log("currFrameMsgs", currFrameMsgs);
 
   return (
     <div>
-      <p>MapLibre Panel</p>
+      <MapLibreMap />
     </div>
   );
 };

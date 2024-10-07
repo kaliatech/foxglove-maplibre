@@ -9,7 +9,7 @@ export function DebugPanel({ context }: { context: PanelExtensionContext }): JSX
 
   // We use a layout effect to setup render handling for our panel. We also setup some topic subscriptions.
   useLayoutEffect(() => {
-    console.log("useLayoutEffect");
+    //console.debug("useLayoutEffect");
     // The render handler is run by the broader studio system during playback when your panel
     // needs to render because the fields it is watching have changed. How you handle rendering depends on your framework.
     // You can only setup one render handler - usually early on in setting up your panel.
@@ -45,15 +45,13 @@ export function DebugPanel({ context }: { context: PanelExtensionContext }): JSX
 
     // subscribe to some topics, you could do this within other effects, based on input fields, etc
     // Once you subscribe to topics, currentFrame will contain message events from those topics (assuming there are messages).
-    context.subscribe([{ topic: "/gps" }]);
+    //context.subscribe([{ topic: "/gps" }]);
   }, [context]);
 
   // invoke the done callback once the render is complete
   useEffect(() => {
     renderDone?.();
   }, [renderDone]);
-
-  console.log("messages", messages);
 
   return (
     <div style={{ padding: "1rem" }}>
