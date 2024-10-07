@@ -10,6 +10,7 @@
   "keywords": [],
   "scripts": {
     "build": "foxglove-extension build",
+    "dev": "nodemon --watch src --ext css,ts,tsx --exec \"npm run local-install\"",
     "format": "prettier --write .",
     "foxglove:prepublish": "foxglove-extension build --mode production",
     "lint:ci": "eslint --report-unused-disable-directives .",
@@ -34,6 +35,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",

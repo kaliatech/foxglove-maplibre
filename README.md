@@ -49,14 +49,14 @@ npm run format
 npm run build
 ```
 
-### Deployment
+### Deploy (local)
 
 ```shell
 # Deploy to local Foxglove installation
 npm run local-install
 
-# Rebuild and redeploy on any change
-# TODO: add script using something like nodemon
+# Rebuild and redeploy upon any source change (experimental)
+npm run dev 
 
 ```
 
@@ -64,7 +64,7 @@ After local-install, restart the Foxglove desktop or `ctrl-r` to refresh if it i
 
 Debug inside Foxglove using `ctrl-i` to open dev console.
 
-## Distribution
+### Package and Publish
 
 ```shell
 # Package as .foxe
@@ -73,3 +73,7 @@ npm run package
 # Release
 # This is done automatically via git tags and github actions
 ```
+
+Publishing:
+
+https://docs.foxglove.dev/docs/visualization/extensions/publish/#packaging-your-extension
