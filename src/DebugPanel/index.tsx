@@ -1,8 +1,7 @@
 import { Immutable, MessageEvent, PanelExtensionContext, Topic } from "@foxglove/extension";
 import { useEffect, useLayoutEffect, useState, JSX } from "react";
-import { createRoot } from "react-dom/client";
 
-function ExamplePanel({ context }: { context: PanelExtensionContext }): JSX.Element {
+export function DebugPanel({ context }: { context: PanelExtensionContext }): JSX.Element {
   const [topics, setTopics] = useState<undefined | Immutable<Topic[]>>();
   const [messages, setMessages] = useState<undefined | Immutable<MessageEvent[]>>();
 
@@ -10,6 +9,7 @@ function ExamplePanel({ context }: { context: PanelExtensionContext }): JSX.Elem
 
   // We use a layout effect to setup render handling for our panel. We also setup some topic subscriptions.
   useLayoutEffect(() => {
+    console.log("useLayoutEffect");
     // The render handler is run by the broader studio system during playback when your panel
     // needs to render because the fields it is watching have changed. How you handle rendering depends on your framework.
     // You can only setup one render handler - usually early on in setting up your panel.
@@ -45,7 +45,7 @@ function ExamplePanel({ context }: { context: PanelExtensionContext }): JSX.Elem
 
     // subscribe to some topics, you could do this within other effects, based on input fields, etc
     // Once you subscribe to topics, currentFrame will contain message events from those topics (assuming there are messages).
-    context.subscribe([{ topic: "/some/topic" }]);
+    context.subscribe([{ topic: "/gps" }]);
   }, [context]);
 
   // invoke the done callback once the render is complete
@@ -53,9 +53,11 @@ function ExamplePanel({ context }: { context: PanelExtensionContext }): JSX.Elem
     renderDone?.();
   }, [renderDone]);
 
+  console.log("messages", messages);
+
   return (
     <div style={{ padding: "1rem" }}>
-      <h2>Welcome to your new extension panel!</h2>
+      <h2>Debug Extension Panel</h2>
       <p>
         Check the{" "}
         <a href="https://foxglove.dev/docs/studio/extensions/getting-started">documentation</a> for
@@ -74,14 +76,4 @@ function ExamplePanel({ context }: { context: PanelExtensionContext }): JSX.Elem
       <div>{messages?.length}</div>
     </div>
   );
-}
-
-export function initExamplePanel(context: PanelExtensionContext): () => void {
-  const root = createRoot(context.panelElement);
-  root.render(<ExamplePanel context={context} />);
-
-  // Return a function to run when the panel is removed
-  return () => {
-    root.unmount();
-  };
 }
