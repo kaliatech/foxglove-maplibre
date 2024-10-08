@@ -56,7 +56,7 @@ npm run build
 npm run local-install
 
 # Rebuild and redeploy upon any source change (experimental)
-npm run dev 
+npm run dev
 
 ```
 

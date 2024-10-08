@@ -1,5 +1,6 @@
 import { Immutable, MessageEvent, PanelExtensionContext } from "@foxglove/extension";
 import { useEffect, useLayoutEffect, useState, JSX } from "react";
+
 import { MapLibreMap } from "./MapLibreMap";
 
 export const MapLibrePanel = ({ context }: { context: PanelExtensionContext }): JSX.Element => {
