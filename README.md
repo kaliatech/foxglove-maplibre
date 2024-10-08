@@ -8,6 +8,24 @@ Default map panel is in the center. Map panel from this extension is on the righ
 
 ![Screenshot 001](docs/i/screenshot-20241008-001.avif)
 
+## TODO
+As of 2024-10-08, this extension is not complete and has not yet been released.
+
+TODO - v1 (for initial release)
+ - Implement current location indicator
+ - Implement settings panel
+   - Custom map tile source settings
+   - For predefined Maptiler tile source, support api key
+   - Support custom topic subscription for LocationFix
+ - Setup CI/CD for automated releases
+ - Submit PR/issue to Foxglove for the webpack config workaround
+
+TODO - 2.0.0
+- Support more than one topic subscription, custom color per
+- Support custom (possibly predefined) markers
+- Add dynamic marker sizing according to zoom level
+- Submit to foxglove extension registry
+ 
 ## Development
 
 ### Prerequisites
