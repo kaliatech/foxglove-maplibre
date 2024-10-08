@@ -2,6 +2,12 @@
 
 [Foxglove](https://foxglove.dev) allows developers to create [extensions](https://docs.foxglove.dev/docs/visualization/extensions/introduction). This repo contains source for an extension that provides a panel for displaying positional data using MapLibre.
 
+## Screenshot
+
+Default map panel is in the center. Map panel from this extension is on the right using a maptiler tileset, with a tilted camera and 3D buildings.
+
+![Screenshot 001](docs/i/screenshot-20241008-001.avif)
+
 ## Development
 
 ### Prerequisites
