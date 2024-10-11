@@ -1,6 +1,6 @@
 # Foxglove MapLibre Extension
 
-[Foxglove](https://foxglove.dev) allows developers to create [extensions](https://docs.foxglove.dev/docs/visualization/extensions/introduction). This repo contains source for an extension that provides a panel for displaying positional data using MapLibre.
+This repo contains source for an [extension](https://docs.foxglove.dev/docs/visualization/extensions/introduction) that can be installed in [Foxglove](https://foxglove.dev) that provides a map panel based on MapLibre. The default map panel in Foxglove uses [Leaflet](https://leafletjs.com/).
 
 ## Screenshot
 
@@ -9,23 +9,30 @@ Default map panel is in the center. Map panel from this extension is on the righ
 ![Screenshot 001](docs/i/screenshot-20241008-001.avif)
 
 ## TODO
+
 As of 2024-10-08, this extension is not complete and has not yet been released.
 
 TODO - v1 (for initial release)
- - Implement current location indicator
- - Implement settings panel
-   - Custom map tile source settings
-   - For predefined Maptiler tile source, support api key
-   - Support custom topic subscription for LocationFix
- - Setup CI/CD for automated releases
- - Submit PR/issue to Foxglove for the webpack config workaround
+
+- [x] Implement basic map panel showing all `LocationFix` messages for a single topic
+- [x] Implement current location indicator
+- [ ] Add hover/select interaction like seen in default map panel
+- [ ] Implement settings panel
+  - [ ] Custom map tile source settings
+  - [ ] For predefined Maptiler tile source, support api key
+  - [ ] Support custom topic subscription for LocationFix
+- [ ] Setup CI/CD for automated releases
+- [ ] Submit PR/issue to Foxglove for the webpack config workaround
 
 TODO - 2.0.0
-- Support more than one topic subscription, custom color per
-- Support custom (possibly predefined) markers
-- Add dynamic marker sizing according to zoom level
-- Submit to foxglove extension registry
- 
+
+- [ ] Support more than one topic subscription, custom color per
+- [ ] Support custom (possibly predefined) markers
+- [ ] Add trailing/fading history of location markers (optional)
+- [ ] Add dynamic marker sizing according to zoom level
+- [ ] Submit to foxglove extension registry
+-
+
 ## Development
 
 ### Prerequisites
