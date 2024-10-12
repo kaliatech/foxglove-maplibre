@@ -16,7 +16,7 @@ TODO - v1 (for initial release)
 
 - [x] Implement basic map panel showing all `LocationFix` messages for a single topic
 - [x] Implement current location indicator
-- [ ] Add hover/select interaction like seen in default map panel
+- [x] Add hover/select interaction like seen in default map panel
 - [ ] Implement settings panel
   - [ ] Custom map tile source settings
   - [ ] For predefined Maptiler tile source, support api key
@@ -31,7 +31,6 @@ TODO - 2.0.0
 - [ ] Add trailing/fading history of location markers (optional)
 - [ ] Add dynamic marker sizing according to zoom level
 - [ ] Submit to foxglove extension registry
--
 
 ## Development
 

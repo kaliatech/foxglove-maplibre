@@ -1,7 +1,7 @@
 import { PanelExtensionContext } from "@foxglove/extension";
 import { LocationFix } from "@foxglove/schemas/schemas/typescript/LocationFix";
 import { produce } from "immer";
-import { useEffect, useLayoutEffect, useState, JSX } from "react";
+import { useEffect, useLayoutEffect, useState, JSX, useCallback } from "react";
 
 import { MapLibreMap } from "./MapLibreMap";
 import { TopicConfig } from "./_support/TopicConfig";
@@ -22,6 +22,29 @@ export const MapLibrePanel = ({ context }: { context: PanelExtensionContext }): 
   const [currLocationFixes, setCurrLocationFixes] = useState(new Map<string, LocationFix[]>());
 
   const [renderDone, setRenderDone] = useState<(() => void) | undefined>();
+
+  const handleLocationFixMouseEnter = useCallback(
+    (locationFix: LocationFix) => {
+      //TODOJ: Update FG documentation to indicate that previewTime is in seconds (had to look at source for
+      // RenderState). It needs to be float value for precise seeking.
+      context.setPreviewTime(locationFix.timestamp.sec + locationFix.timestamp.nsec / 1e9);
+    },
+    [context],
+  );
+
+  const handleLocationFixMouseLeave = useCallback(
+    (_locationFix: LocationFix) => {
+      context.setPreviewTime(undefined);
+    },
+    [context],
+  );
+
+  const handleLocationFixClick = useCallback(
+    (locationFix: LocationFix) => {
+      context.seekPlayback?.(locationFix.timestamp);
+    },
+    [context],
+  );
 
   useLayoutEffect(() => {
     //console.debug("useLayoutEffect");
@@ -100,6 +123,9 @@ export const MapLibrePanel = ({ context }: { context: PanelExtensionContext }): 
       <MapLibreMap
         allLocationFixesByTopic={allLocationFixes}
         currLocationFixesByTopic={currLocationFixes}
+        onLocationFixMouseEnter={handleLocationFixMouseEnter}
+        onLocationFixMouseLeave={handleLocationFixMouseLeave}
+        onLocationFixClick={handleLocationFixClick}
       />
     </div>
   );

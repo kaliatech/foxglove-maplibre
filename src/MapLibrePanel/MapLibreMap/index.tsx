@@ -7,8 +7,8 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { PositionMarker } from "./markers/PositionMarker";
 import { calculateBoundingBox } from "./support/calculateBoundingBox";
 import createInitialViewState from "./support/createInitialViewState";
-import { isTimeEqual } from "../_support/TimeUtils";
 import { toLatLngBounds } from "../../domain/CoordinateBounds";
+import { isTimeEqual } from "../_support/TimeUtils";
 
 /**
  * TODOJ: Key is being added to temporarily codebase. This should eventually be removed and the API key revoked in maptiler. The key
@@ -19,11 +19,17 @@ const MAP_TILER_KEY = "9W33cFPB8xW8Npr5O99W";
 interface MapLibreMapProps {
   allLocationFixesByTopic: Map<string, LocationFix[]>;
   currLocationFixesByTopic: Map<string, LocationFix[]>;
+  onLocationFixMouseEnter?: (locationFix: LocationFix) => void;
+  onLocationFixMouseLeave?: (locationFix: LocationFix) => void;
+  onLocationFixClick?: (locationFix: LocationFix) => void;
 }
 
 export const MapLibreMap = ({
   allLocationFixesByTopic,
   currLocationFixesByTopic,
+  onLocationFixMouseEnter,
+  onLocationFixMouseLeave,
+  onLocationFixClick,
 }: MapLibreMapProps): ReactNode => {
   const mapRef = useRef<MapRef>(null);
 
@@ -108,7 +114,15 @@ export const MapLibreMap = ({
             //alternatively:
             // <PositionMarker locationFix={location} size="13px" isHighlighted={true} />
           } else {
-            return <PositionMarker key={`marker-${index.toString()}`} locationFix={location} />;
+            return (
+              <PositionMarker
+                key={`marker-${index.toString()}`}
+                locationFix={location}
+                onLocationFixMouseEnter={onLocationFixMouseEnter}
+                onLocationFixMouseLeave={onLocationFixMouseLeave}
+                onLocationFixClick={onLocationFixClick}
+              />
+            );
           }
         });
       })}
@@ -118,8 +132,11 @@ export const MapLibreMap = ({
           <PositionMarker
             key={`curr-marker-${index.toString()}`}
             locationFix={currLocationFix}
-            size="13px"
+            size={13}
             isHighlighted={true}
+            onLocationFixMouseEnter={onLocationFixMouseEnter}
+            onLocationFixMouseLeave={onLocationFixMouseLeave}
+            onLocationFixClick={onLocationFixClick}
           />
         ));
       })}
